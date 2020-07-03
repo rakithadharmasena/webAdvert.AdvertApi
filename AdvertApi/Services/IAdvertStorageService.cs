@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AdvertApi.Services
 {
-    interface IAdvertStorageService
+    public interface IAdvertStorageService
     {
         Task<string> AddAsync(AdvertModel model);
         Task ConfirmAsync(ConfirmAdvertModel model);

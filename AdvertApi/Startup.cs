@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using AutoMapper;
+using AdvertApi.Services;
 
 namespace AdvertApi
 {
@@ -26,6 +27,7 @@ namespace AdvertApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Startup));
+            services.AddTransient<IAdvertStorageService, DynamoDBAdvertStorage>();
             services.AddControllers();
         }
 
