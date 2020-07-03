@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>Rakitha Dharmasena</Authors>
+    <Company>Rakitha Dharmasena</Company>
+    <Description>Practice excercise for microservices course</Description>
+    <Product>AdvertApi</Product>
+    <RepositoryUrl>https://github.com/rakithadharmasena/webAdvert.AdvertApi</RepositoryUrl>
+    <PackageId>AdvertApi.Models.gaba</PackageId>
   </PropertyGroup>
 
 </Project>
