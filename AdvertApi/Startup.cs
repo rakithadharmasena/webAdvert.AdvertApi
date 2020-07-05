@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using AutoMapper;
 using AdvertApi.Services;
 using AdvertApi.HealthChecks;
+using Amazon.DynamoDBv2;
 
 namespace AdvertApi
 {
@@ -30,6 +31,8 @@ namespace AdvertApi
             services.AddAutoMapper(typeof(Startup));
             services.AddTransient<IAdvertStorageService, DynamoDBAdvertStorage>();
             services.AddControllers();
+            services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
+            services.AddAWSService<IAmazonDynamoDB>();
             services.AddHealthChecks().AddCheck<StorageHealthChecks>("Storage");
         }
 

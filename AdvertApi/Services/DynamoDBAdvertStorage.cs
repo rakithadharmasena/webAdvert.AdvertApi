@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
+using Microsoft.Extensions.Configuration;
 
 namespace AdvertApi.Services
 {
     public class DynamoDBAdvertStorage : IAdvertStorageService
     {
         private readonly IMapper _mapper;
+        private readonly IConfiguration _configuration;
 
-        public DynamoDBAdvertStorage(IMapper mapper)
+        public DynamoDBAdvertStorage(IMapper mapper, IConfiguration configuration)
         {
             _mapper = mapper;
+            _configuration = configuration;
         }
 
         public async Task<string> AddAsync(AdvertModel model)
@@ -41,8 +44,9 @@ namespace AdvertApi.Services
 
         public async Task<bool> CheckHealthAsync()
         {
+            var options = _configuration.GetAWSOptions();
             Console.WriteLine("Health checking...");
-            using (var client = new AmazonDynamoDBClient())
+            using (var client = options.CreateServiceClient<IAmazonDynamoDB>())
             {
                 var tableData = await client.DescribeTableAsync("Adverts");
                 return string.Compare(tableData.Table.TableStatus, "active", true) == 0;
